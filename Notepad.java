@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package notepad;
 
 /**
  *
@@ -24,6 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 public class Notepad extends JFrame implements ActionListener
 {
+	static Notepad passWordFrame;
     byte[] encryptedData;
 	JMenu m1,m2,m3,m4,m5;
 	JMenuBar bar;
@@ -42,11 +42,11 @@ public class Notepad extends JFrame implements ActionListener
 		setTitle("Enter password");
 		setLayout(null);
 		tf=new JTextField();
-		tf.setBounds(200,100,100,30);
+		tf.setBounds(200, 100, 100, 30);
 		add(tf);
 		b1=new JButton("OK");
 		add(b1);
-		b1.setBounds(200,200,80,30);
+		b1.setBounds(200, 200, 80, 30);
 		b1.addActionListener(this);
 		setBounds(800,300,400,500);
 		JLabel l1=new JLabel("Enter password");
@@ -54,12 +54,14 @@ public class Notepad extends JFrame implements ActionListener
 		add(l1);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		getRootPane().setDefaultButton(b1);	// when user presses ENTER then it automatically clicks on OK button.
+
 	}
 
 	Notepad()
 	{
 		setTitle("Notepad");
-		setLayout(null);
+		setLayout(new BorderLayout());	// so as to make textArea resizable
 		try
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -151,16 +153,14 @@ public class Notepad extends JFrame implements ActionListener
 		{
 			mi[i].addActionListener(this);
 		}
-
-		jp.setBounds(0,0,685,341); 
-		setBounds(0,0,700,400);
+		setBounds(0, 0, 700, 400);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public static void main(String...sa)
 	{
-		new Notepad(1);
+		passWordFrame = new Notepad(1);
 	}
 
 	public void actionPerformed(ActionEvent ae)
@@ -192,7 +192,7 @@ public class Notepad extends JFrame implements ActionListener
 				//	System.out.println(f1);
 			}
 			else if(x==JFileChooser.CANCEL_OPTION)
-				System.out.println("cancel");
+				System.out.println("cancel button is pressed");
 		}
 		else if(ae.getSource()==mi[2])	//for save
 		{
@@ -255,6 +255,7 @@ public class Notepad extends JFrame implements ActionListener
 			pass=tf.getText();
 			if(pass.equals("test"))
 			{
+				passWordFrame.dispose();
 				new Notepad();
 			}
 			else{
@@ -288,7 +289,7 @@ public class Notepad extends JFrame implements ActionListener
 		}
 		else if(x==JFileChooser.CANCEL_OPTION)
 		{
-			System.out.println("cancel");
+			System.out.println("cancel button is pressed");
 		}
 	}
 
