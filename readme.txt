@@ -6,7 +6,6 @@ http://commons.apache.org/proper/commons-codec/download_codec.cgi
 
 To compile the program:
  javac Notepad.java
- java Notepad
 
 After that include the libraries and then complie java program.
 
